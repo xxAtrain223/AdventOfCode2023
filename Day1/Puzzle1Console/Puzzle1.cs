@@ -26,6 +26,12 @@ public static partial class Puzzle1
         }
     }
 
+    public static int GetCalibrationValue(IEnumerable<string> lines) =>
+        lines.Sum(GetCalibrationValue);
+
+    public static int GetCalibrationValue(FileInfo file) =>
+        GetCalibrationValue(File.ReadLines(file.FullName));
+
     [GeneratedRegex(@"^\D*?(\d).*?(\d?)\D*?$")]
     private static partial Regex GetNumbersRegex();
 }

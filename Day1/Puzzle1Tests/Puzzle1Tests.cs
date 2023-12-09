@@ -11,4 +11,17 @@ public partial class Puzzle1Tests
     {
         Puzzle1.GetCalibrationValue(line).Should().Be(number);
     }
+
+    [Fact]
+    public void ShouldGetCalibrationValueFromIEnumerable()
+    {
+        IEnumerable<string> lines = [
+            "1abc2",
+            "pqr3stu8vwx",
+            "a1b2c3d4e5f",
+            "treb7uchet",
+        ];
+
+        Puzzle1.GetCalibrationValue(lines).Should().Be(142);
+    }
 }

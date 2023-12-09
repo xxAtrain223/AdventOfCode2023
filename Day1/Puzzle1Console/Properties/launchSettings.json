@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Puzzle1Console": {
+      "commandName": "Project",
+      "commandLineArgs": "--file input.txt"
+    }
+  }
+}
