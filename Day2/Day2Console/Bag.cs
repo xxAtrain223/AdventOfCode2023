@@ -43,7 +43,46 @@ public partial record Bag(int RedCount, int GreenCount, int BlueCount)
         return true;
     }
 
-    private (int redCount, int greenCount, int blueCount) ParseHandful(string handful)
+    public static int SumGamePowers(IEnumerable<string> games) => games
+        .Sum(GetGamePower);
+
+    public static int GetGamePower(string game)
+    {
+        var (redCount, greenCount, blueCount) = GetMaxColorCounts(game);
+
+        return redCount * greenCount * blueCount;
+    }
+
+    public static (int redCount, int greenCount, int blueCount) GetMaxColorCounts(string game)
+    {
+        var handfuls = game.Split("; ").Select(ParseHandful);
+
+        var maxRedCount = 0;
+        var maxGreenCount = 0;
+        var maxBlueCount = 0;
+
+        foreach (var (redCount, greenCount, blueCount) in handfuls)
+        {
+            if (redCount > maxRedCount)
+            {
+                maxRedCount = redCount;
+            }
+            
+            if (greenCount > maxGreenCount)
+            {
+                maxGreenCount = greenCount;
+            }
+            
+            if (blueCount > maxBlueCount)
+            {
+                maxBlueCount = blueCount;
+            }
+        }
+
+        return (maxRedCount, maxGreenCount, maxBlueCount);
+    }
+
+    private static (int redCount, int greenCount, int blueCount) ParseHandful(string handful)
     {
         var matches = ColorCountRegex().Matches(handful);
 
@@ -71,7 +110,7 @@ public partial record Bag(int RedCount, int GreenCount, int BlueCount)
         return (redCount, greenCount, blueCount);
     }
 
-    private (int count, string color) ParseColorCount(Match match)
+    private static (int count, string color) ParseColorCount(Match match)
     {
         return (int.Parse(match.Groups[1].ValueSpan), match.Groups[2].Value);
     }
