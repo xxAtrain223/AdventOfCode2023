@@ -1,6 +1,6 @@
-namespace AdventOfCode2023.Day1.Puzzle1Tests;
+namespace AdventOfCode2023.Day1.Day1Tests;
 
-public partial class Puzzle1Tests
+public partial class CalibrationValuesTests
 {
     [Theory]
     [InlineData("1abc2", 12)]
@@ -9,7 +9,7 @@ public partial class Puzzle1Tests
     [InlineData("treb7uchet", 77)]
     public void ShouldGetCalibrationValueFromLine(string line, int number)
     {
-        Puzzle1.GetCalibrationValue(line).Should().Be(number);
+        CalibrationValues.GetCalibrationValue(line).Should().Be(number);
     }
 
     [Fact]
@@ -22,7 +22,7 @@ public partial class Puzzle1Tests
             "treb7uchet",
         ];
 
-        Puzzle1.GetCalibrationValue(lines).Should().Be(142);
+        CalibrationValues.GetCalibrationValue(lines).Should().Be(142);
     }
 
     [Theory]
@@ -35,7 +35,7 @@ public partial class Puzzle1Tests
     [InlineData("7pqrstsixteen", 76)]
     public void ShouldGetCalibrationValueFromLineWithSpelledOutNumbers(string line, int number)
     {
-        Puzzle1.GetCalibrationValue(line).Should().Be(number);
+        CalibrationValues.GetCalibrationValue(line).Should().Be(number);
     }
 
     [Fact]
@@ -51,6 +51,6 @@ public partial class Puzzle1Tests
             "7pqrstsixteen",
         ];
 
-        Puzzle1.GetCalibrationValue(lines).Should().Be(281);
+        CalibrationValues.GetCalibrationValue(lines).Should().Be(281);
     }
 }

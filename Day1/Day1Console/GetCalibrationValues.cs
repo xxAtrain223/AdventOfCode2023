@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AdventOfCode2023.Day1.Puzzle1Console;
+namespace AdventOfCode2023.Day1.Day1Console;
 
-public static partial class Puzzle1
+public static partial class CalibrationValues
 {
     public static int GetCalibrationValue(string line)
     {

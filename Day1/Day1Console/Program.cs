@@ -1,4 +1,4 @@
-﻿using AdventOfCode2023.Day1.Puzzle1Console;
+﻿using AdventOfCode2023.Day1.Day1Console;
 using System.CommandLine;
 
 var fileOption = new Option<FileInfo>(
@@ -18,7 +18,7 @@ return await rootCommand.InvokeAsync(args);
 
 static void GetAndPrintCalibrationValue(FileInfo file)
 {
-    var calibrationValue = Puzzle1.GetCalibrationValue(file);
+    var calibrationValue = CalibrationValues.GetCalibrationValue(file);
 
     Console.WriteLine($"Calibration Value: {calibrationValue}");
     Console.ReadLine();
