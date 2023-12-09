@@ -25,4 +25,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Day2Console\Day2Console.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,7 +6,7 @@ var fileOption = new Option<FileInfo>(
     description: "The calibration file to read.");
 fileOption.AddAlias("-f");
 
-var rootCommand = new RootCommand("Advent of Code 2023 - Day 1 - Puzzle 1");
+var rootCommand = new RootCommand("Advent of Code 2023 - Day 1");
 rootCommand.AddOption(fileOption);
 
 rootCommand.SetHandler((file) =>
