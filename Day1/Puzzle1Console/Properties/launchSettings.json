@@ -1,8 +1,12 @@
 {
   "profiles": {
-    "Puzzle1Console": {
+    "Day 1 Input 1": {
       "commandName": "Project",
-      "commandLineArgs": "--file input.txt"
+      "commandLineArgs": "--file input1.txt"
+    },
+    "Day 1 Input 2": {
+      "commandName": "Project",
+      "commandLineArgs": "--file input2.txt"
     }
   }
 }

@@ -6,25 +6,43 @@ public static partial class Puzzle1
 {
     public static int GetCalibrationValue(string line)
     {
-        var match = GetNumbersRegex().Match(line);
+        var firstNumberMatch = FirstNumberRegex().Match(line);
 
-        if (match.Success == false)
+        if (firstNumberMatch.Success == false)
         {
-            throw new Exception($"The GetNumbersRegex did not match the line '{line}'.");
+            throw new Exception($"The FirstNumberRegex did not match the line '{line}'.");
         }
 
-        var firstNumberSpan = match.Groups[1].ValueSpan;
-        var lastNumberSpan = match.Groups[2].ValueSpan;
+        var lastNumberMatch = LastNumberRegex().Match(line);
 
-        if (lastNumberSpan.IsEmpty == false)
+        if (lastNumberMatch.Success == false)
         {
-            return int.Parse(string.Concat(firstNumberSpan, lastNumberSpan));
+            throw new Exception($"The LastNumberRegex did not match the line '{line}'.");
         }
-        else
-        {
-            return int.Parse(string.Concat(firstNumberSpan, firstNumberSpan));
-        }
+
+        var firstNumber = ParseNumber(firstNumberMatch.Groups[1].ValueSpan);
+        var lastNumber = ParseNumber(lastNumberMatch.Groups[1].ValueSpan);
+
+        return firstNumber * 10 + lastNumber;
     }
+
+    private static int ParseNumber(ReadOnlySpan<char> numberSpan) =>
+        int.TryParse(numberSpan, out var parsedNumber) ?
+        parsedNumber : ParseSpelledOutInt(numberSpan);
+
+    private static int ParseSpelledOutInt(ReadOnlySpan<char> numberSpan) => numberSpan switch
+    {
+        "one" => 1,
+        "two" => 2,
+        "three" => 3,
+        "four" => 4,
+        "five" => 5,
+        "six" => 6,
+        "seven" => 7,
+        "eight" => 8,
+        "nine" => 9,
+        _ => throw new Exception($"Unknown number '{numberSpan}'")
+    };
 
     public static int GetCalibrationValue(IEnumerable<string> lines) =>
         lines.Sum(GetCalibrationValue);
@@ -32,6 +50,9 @@ public static partial class Puzzle1
     public static int GetCalibrationValue(FileInfo file) =>
         GetCalibrationValue(File.ReadLines(file.FullName));
 
-    [GeneratedRegex(@"^\D*?(\d).*?(\d?)\D*?$")]
-    private static partial Regex GetNumbersRegex();
+    [GeneratedRegex(@"(\d|one|two|three|four|five|six|seven|eight|nine)")]
+    private static partial Regex FirstNumberRegex();
+
+    [GeneratedRegex(@"(\d|one|two|three|four|five|six|seven|eight|nine)", RegexOptions.RightToLeft)]
+    private static partial Regex LastNumberRegex();
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day1", "Day1", "{DDAA6524-8002-46B7-9C31-F92DEB4CA3CC}"
 	ProjectSection(SolutionItems) = preProject
-		Day1\Puzzle1Description.md = Day1\Puzzle1Description.md
+		Day1\Day1Description.md = Day1\Day1Description.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puzzle1Console", "Day1\Puzzle1Console\Puzzle1Console.csproj", "{BFF8804D-5459-4882-8E23-02A4A8B3057B}"
@@ -15,6 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F17298E6-0D96-48AF-95B0-651C75027503}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Global

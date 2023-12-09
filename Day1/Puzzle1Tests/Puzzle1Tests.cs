@@ -24,4 +24,33 @@ public partial class Puzzle1Tests
 
         Puzzle1.GetCalibrationValue(lines).Should().Be(142);
     }
+
+    [Theory]
+    [InlineData("two1nine", 29)]
+    [InlineData("eightwothree", 83)]
+    [InlineData("abcone2threexyz", 13)]
+    [InlineData("xtwone3four", 24)]
+    [InlineData("4nineeightseven2", 42)]
+    [InlineData("zoneight234", 14)]
+    [InlineData("7pqrstsixteen", 76)]
+    public void ShouldGetCalibrationValueFromLineWithSpelledOutNumbers(string line, int number)
+    {
+        Puzzle1.GetCalibrationValue(line).Should().Be(number);
+    }
+
+    [Fact]
+    public void ShouldGetCalibrationValueFromIEnumerableWithSpelledOutNumbers()
+    {
+        IEnumerable<string> lines = [
+            "two1nine",
+            "eightwothree",
+            "abcone2threexyz",
+            "xtwone3four",
+            "4nineeightseven2",
+            "zoneight234",
+            "7pqrstsixteen",
+        ];
+
+        Puzzle1.GetCalibrationValue(lines).Should().Be(281);
+    }
 }
