@@ -2,7 +2,11 @@
   "profiles": {
     "Day 2 Input 1": {
       "commandName": "Project",
-      "commandLineArgs": "--file input1.txt"
+      "commandLineArgs": "--sum-possible-game-ids input1.txt"
+    },
+    "Day 2 Input 2": {
+      "commandName": "Project",
+      "commandLineArgs": "--sum-game-powers input2.txt"
     }
   }
 }

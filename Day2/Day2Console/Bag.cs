@@ -43,8 +43,21 @@ public partial record Bag(int RedCount, int GreenCount, int BlueCount)
         return true;
     }
 
+    public static int SumGamePowers(FileInfo file) =>
+        SumGamePowers(File.ReadLines(file.FullName));
+
     public static int SumGamePowers(IEnumerable<string> games) => games
-        .Sum(GetGamePower);
+        .Sum(g =>
+        {
+            var gameMatch = GameRegex().Match(g);
+
+            if (gameMatch.Success == false)
+            {
+                throw new Exception($"The GameRegex did not match the line '{g}'.");
+            }
+
+            return GetGamePower(gameMatch.Groups[2].Value);
+        });
 
     public static int GetGamePower(string game)
     {
