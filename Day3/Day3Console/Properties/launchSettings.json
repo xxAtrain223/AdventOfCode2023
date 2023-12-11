@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Day 3 Input 1": {
+      "commandName": "Project",
+      "commandLineArgs": "--sum-part-numbers input1.txt"
+    }
+  }
+}

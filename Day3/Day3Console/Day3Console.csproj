@@ -5,8 +5,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>AdventOfCode2023.Day2.$(MSBuildProjectName)</AssemblyName>
-    <RootNamespace>AdventOfCode2023.Day2.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <AssemblyName>AdventOfCode2023.Day3.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>AdventOfCode2023.Day3.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,9 +15,6 @@
 
   <ItemGroup>
     <None Update="input1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="input2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
