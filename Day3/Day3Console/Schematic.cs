@@ -129,8 +129,7 @@ public partial class Schematic
     }
 
     public IEnumerable<int> GetPartNumbersAroundSymbols() => _symbols
-        .SelectMany(s => GetPartNumbersAroundLocation(s.Row, s.Column))
-        .Distinct();
+        .SelectMany(s => GetPartNumbersAroundLocation(s.Row, s.Column).Distinct());
 
     public int SumAllPartNumbersAroundSymbols() =>
         GetPartNumbersAroundSymbols().Sum();
