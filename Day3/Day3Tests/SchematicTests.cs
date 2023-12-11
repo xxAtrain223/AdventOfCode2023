@@ -98,6 +98,49 @@ public class SchematicTests
         _schematic.SumAllPartNumbersAroundSymbols().Should().Be(4361);
     }
 
+    [Fact]
+    public void GetGearSymbols_ShouldReturn2Sets()
+    {
+        _schematic.MapLines("""
+            467..114..
+            ...*......
+            ..35..633.
+            ......#...
+            617*......
+            .....+.58.
+            ..592.....
+            ......755.
+            ...$.*....
+            .664.598..
+            """);
+        _schematic.FinalizeMapping();
+
+        _schematic.GetGearSymbolPartNumbers().Should().BeEquivalentTo([
+            new int[] { 467, 35 },
+            new int[] { 755, 598 }
+        ]);
+    }
+
+    [Fact]
+    public void SumGearRatios_ShouldReturn467835()
+    {
+        _schematic.MapLines("""
+            467..114..
+            ...*......
+            ..35..633.
+            ......#...
+            617*......
+            .....+.58.
+            ..592.....
+            ......755.
+            ...$.*....
+            .664.598..
+            """);
+        _schematic.FinalizeMapping();
+
+        _schematic.SumGearRatios().Should().Be(467835);
+    }
+
     public class MapSchematicPartNumbersTestData : TheoryData<string, IEnumerable<Part>>
     {
         public MapSchematicPartNumbersTestData()

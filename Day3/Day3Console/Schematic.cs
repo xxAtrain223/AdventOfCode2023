@@ -134,6 +134,15 @@ public partial class Schematic
     public int SumAllPartNumbersAroundSymbols() =>
         GetPartNumbersAroundSymbols().Sum();
 
+    public IEnumerable<int[]> GetGearSymbolPartNumbers() =>
+        _symbols.Where(s => s.Symbol == '*')
+        .Select(s => GetPartNumbersAroundLocation(s.Row, s.Column).Distinct().ToArray())
+        .Where(p => p.Length == 2);
+
+    public int SumGearRatios() =>
+        GetGearSymbolPartNumbers()
+        .Sum(r => r[0] * r[1]);
+
     [GeneratedRegex(@"\d+")]
     private static partial Regex PartNumberRegex();
 
