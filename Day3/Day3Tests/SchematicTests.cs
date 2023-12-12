@@ -1,4 +1,4 @@
-namespace Day3Tests;
+namespace AdventOfCode2023.Day3.Day3Tests;
 
 public class SchematicTests
 {

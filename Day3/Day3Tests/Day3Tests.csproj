@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>AdventOfCode2023.Day3.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>AdventOfCode2023.Day3.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
