@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day4", "Day4", "{33E67D30-0
 		Day4\Day4Description.md = Day4\Day4Description.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day4Tests", "Day4Tests\Day4Tests.csproj", "{EFFDB3FE-58E2-4842-BF38-B4902AA9995E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day4Tests", "Day4\Day4Tests\Day4Tests.csproj", "{EFFDB3FE-58E2-4842-BF38-B4902AA9995E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
