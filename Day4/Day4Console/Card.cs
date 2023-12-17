@@ -55,6 +55,22 @@ public partial class Card
 
     public IEnumerable<int> GetMatchedNumbers() => _myNumbers.Intersect(_winningNumbers);
 
+    private int _matchedNumberCount = -1;
+    public int MatchedNumberCount
+    {
+        get
+        {
+            if (_matchedNumberCount != -1)
+            {
+                return _matchedNumberCount;
+            }
+
+            _matchedNumberCount = GetMatchedNumbers().Count();
+            return _matchedNumberCount;
+        }
+    }
+
+
     public int GetScore()
     {
         var matchedNumbersCount = GetMatchedNumbers().Count();
@@ -72,4 +88,25 @@ public partial class Card
 
     public static int SumCardScores(FileInfo file) =>
         SumCardScores(File.ReadLines(file.FullName));
+
+    public static int Count(IEnumerable<string> cardTexts)
+    {
+        var cards = cardTexts
+            .Select(t => new Card(t))
+            .ToDictionary(c => c.CardNumber);
+
+        var queue = new List<int>(cards.Values.Select(c => c.CardNumber));
+        for (int i = 0; i < queue.Count; i++)
+        {
+            var card = cards[queue[i]];
+            queue.AddRange(Enumerable.Range(
+                card.CardNumber + 1,
+                card.MatchedNumberCount));
+        }
+
+        return queue.Count;
+    }
+
+    public static int Count(FileInfo file) =>
+        Count(File.ReadLines(file.FullName));
 }
