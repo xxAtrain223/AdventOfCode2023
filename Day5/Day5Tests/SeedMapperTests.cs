@@ -46,7 +46,7 @@ public class SeedMapperTests
 
     public void ShouldMapToSoil(int seedValue, int expectedValue)
     {
-        seedMapper.MapTo(seedValue, "soil").Should().Be(expectedValue);
+        seedMapper.MapForward(seedValue, "soil").Should().Be(expectedValue);
     }
 
     [Theory]
@@ -57,7 +57,7 @@ public class SeedMapperTests
 
     public void ShouldMapToFertilizer(int seedValue, int expectedValue)
     {
-        seedMapper.MapTo(seedValue, "fertilizer").Should().Be(expectedValue);
+        seedMapper.MapForward(seedValue, "fertilizer").Should().Be(expectedValue);
     }
 
     [Theory]
@@ -68,7 +68,7 @@ public class SeedMapperTests
 
     public void ShouldMapToWater(int seedValue, int expectedValue)
     {
-        seedMapper.MapTo(seedValue, "water").Should().Be(expectedValue);
+        seedMapper.MapForward(seedValue, "water").Should().Be(expectedValue);
     }
 
     [Theory]
@@ -78,7 +78,7 @@ public class SeedMapperTests
     [InlineData(13, 34)]
     public void ShouldMapToLight(int seedValue, int expectedValue)
     {
-        seedMapper.MapTo(seedValue, "light").Should().Be(expectedValue);
+        seedMapper.MapForward(seedValue, "light").Should().Be(expectedValue);
     }
 
     [Theory]
@@ -88,7 +88,7 @@ public class SeedMapperTests
     [InlineData(13, 34)]
     public void ShouldMapToTemperature(int seedValue, int expectedValue)
     {
-        seedMapper.MapTo(seedValue, "temperature").Should().Be(expectedValue);
+        seedMapper.MapForward(seedValue, "temperature").Should().Be(expectedValue);
     }
 
     [Theory]
@@ -98,7 +98,7 @@ public class SeedMapperTests
     [InlineData(13, 35)]
     public void ShouldMapToHumidity(int seedValue, int expectedValue)
     {
-        seedMapper.MapTo(seedValue, "humidity").Should().Be(expectedValue);
+        seedMapper.MapForward(seedValue, "humidity").Should().Be(expectedValue);
     }
 
     [Theory]
@@ -108,7 +108,7 @@ public class SeedMapperTests
     [InlineData(13, 35)]
     public void ShouldMapToLocation(int seedValue, int expectedValue)
     {
-        seedMapper.MapTo(seedValue, "location").Should().Be(expectedValue);
+        seedMapper.MapForward(seedValue, "location").Should().Be(expectedValue);
     }
 
     [Fact]
@@ -120,6 +120,6 @@ public class SeedMapperTests
     [Fact]
     public void ShouldFindMinimumLocation()
     {
-        seedMapper.FindMinimumLocation().Should().Be(35);
+        seedMapper.FindMinimumLocationForward().Should().Be(35);
     }
 }

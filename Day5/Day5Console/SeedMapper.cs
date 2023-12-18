@@ -1,29 +1,39 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2023.Day5.Day5Console;
 public partial class SeedMapper
 {
     private readonly Dictionary<string, ValueMapper> _valueMappers;
+    private readonly bool _interpretSeedsAsRange;
 
-    public SeedMapper(string mappingsString)
+    public SeedMapper(string mappingsString, bool interpretSeedsAsRange = false)
     {
+        _interpretSeedsAsRange = interpretSeedsAsRange;
+
         var groups = mappingsString
             .Replace("\r", string.Empty)
             .Split("\n\n");
 
-        Seeds = ParseSeeds(groups[0]).ToArray();
+        if (_interpretSeedsAsRange == false)
+        {
+            _seeds = ParseSeeds(groups[0]).ToArray();
+        }
+        else
+        {
+            _seedRanges = ParseSeedRanges(groups[0]).ToArray();
+        }
 
         _valueMappers = groups[1..]
             .Select(g => new ValueMapper(g))
             .ToDictionary(v => v.Source);
     }
 
-    public SeedMapper(FileInfo file) : this(File.ReadAllText(file.FullName))
+    public SeedMapper(FileInfo file, bool interpretSeedsAsRange = false) :
+        this(File.ReadAllText(file.FullName), interpretSeedsAsRange)
     {
     }
 
-    public long MapTo(long seedValue, string destination)
+    public long MapForward(long seedValue, string destination)
     {
         var mapper = _valueMappers["seed"];
         var mappedValue = mapper.MapForward(seedValue);
@@ -52,12 +62,71 @@ public partial class SeedMapper
         }
     }
 
+    private static IEnumerable<(long SeedStart, long SeedLength)> ParseSeedRanges(string seedsString)
+    {
+        if (seedsString.StartsWith("seeds:") == false)
+        {
+            throw new Exception("String does not start with 'seeds:'");
+        }
+
+        var matches = NumberPairRegex().Matches(seedsString);
+
+        foreach (Match match in matches)
+        {
+            yield return (long.Parse(match.Groups[1].ValueSpan), long.Parse(match.Groups[2].ValueSpan));
+        }
+    }
+
     [GeneratedRegex(@"\d+")]
     private static partial Regex NumberRegex();
 
-    public long[] Seeds { get; private set; }
 
-    public long FindMinimumLocation() => Seeds
-        .Select(s => MapTo(s, "location"))
-        .Min();
+    [GeneratedRegex(@"(\d+)\s+(\d+)")]
+    private static partial Regex NumberPairRegex();
+
+    private long[]? _seeds;
+
+    private (long SeedStart, long SeedLength)[]? _seedRanges;
+
+    public IEnumerable<long> Seeds
+    { 
+        get
+        {
+            if (_interpretSeedsAsRange)
+            {
+                foreach (var (seedStart, seedLength) in _seedRanges!)
+                {
+                    Console.WriteLine($"SeedStart: {seedStart}");
+                    for (int i = 0; i < seedLength; i++)
+                    {
+                        yield return seedStart + i;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var seed in _seeds!)
+                {
+                    yield return seed;
+                }
+            }
+        }
+    }
+
+    public long FindMinimumLocationForward()
+    {
+        var chunks = Seeds.Chunk(1_000_000);
+        var minimums = new List<long>();
+
+        Parallel.ForEach(chunks, chunk =>
+        {
+            var minimum = chunk
+                .Select(s => MapForward(s, "location"))
+                .Min();
+            Console.WriteLine($"Found minimum {minimum}");
+            minimums.Add(minimum);
+        });
+
+        return minimums.Min();
+    }
 }

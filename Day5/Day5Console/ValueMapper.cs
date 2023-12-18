@@ -16,6 +16,7 @@ public partial class ValueMapper
         (Source, Destination) = ParseHeader(lines[0]);
         _valueMaps = lines[1..]
             .Select(ParseRange)
+            .OrderBy(r => r.SourceStart)
             .ToArray();
     }
 
@@ -71,6 +72,17 @@ public partial class ValueMapper
 
         return sourceValue;
     }
+
+    //public IEnumerable<(long RangeStart, long RangeLength)> MapRangesForward(IEnumerable<(long RangeStart, long RangeLength)> ranges)
+    //{
+    //    foreach (var (rangeStart, rangeLength) in ranges.OrderBy(r => r.RangeStart))
+    //    {
+    //        var overlappingRanges = _valueMaps
+    //            .Where(m =>
+    //                rangeStart <= m.SourceStart + m.Length &&
+    //                m.SourceStart <= rangeStart + rangeLength);
+    //    }
+    //}
 
     public long MapBackward(long destinationValue)
     {
