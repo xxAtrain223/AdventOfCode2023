@@ -14,11 +14,9 @@ public partial class ValueMapper
         }
 
         (Source, Destination) = ParseHeader(lines[0]);
-        _valueMap = lines[1..]
-            .SelectMany(ParseRange)
-            .ToDictionary(
-                r => r.SourceValue,
-                r => r.DestinationValue);
+        _valueMaps = lines[1..]
+            .Select(ParseRange)
+            .ToArray();
     }
 
     public string Source { get; private set; }
@@ -40,9 +38,9 @@ public partial class ValueMapper
     [GeneratedRegex(@"(\w+)-to-(\w+) map:")]
     private static partial Regex HeaderRegex();
 
-    private IDictionary<long, long> _valueMap;
+    private (long SourceStart, long DestinationStart, long Length)[] _valueMaps;
 
-    private static IEnumerable<(long SourceValue, long DestinationValue)> ParseRange(string rangeString)
+    private static (long SourceStart, long DestinationStart, long Length) ParseRange(string rangeString)
     {
         var match = RangeRegex().Match(rangeString);
 
@@ -55,19 +53,24 @@ public partial class ValueMapper
         var sourceStart = long.Parse(match.Groups[2].ValueSpan);
         var length = long.Parse(match.Groups[3].ValueSpan);
 
-        for (int i = 0; i < length; i++)
-        {
-            yield return (sourceStart + i, destinationStart + i);
-        }
+        return (sourceStart, destinationStart, length);
     }
 
     [GeneratedRegex(@"(\d+)\s+(\d+)\s+(\d+)")]
     private static partial Regex RangeRegex();
 
-    public long Map(long sourceValue) =>
-        _valueMap.TryGetValue(sourceValue, out var destinationValue) ?
-        destinationValue :
-        sourceValue;
+    public long Map(long sourceValue)
+    {
+        foreach (var (sourceStart, destinationStart, length) in _valueMaps)
+        {
+            if (sourceValue >= sourceStart && sourceValue < (sourceStart + length))
+            {
+                return destinationStart + (sourceValue - sourceStart);
+            }
+        }
+
+        return sourceValue;
+    }
 
     public long this[long sourceValue] => Map(sourceValue);
 }
