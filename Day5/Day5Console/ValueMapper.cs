@@ -40,9 +40,9 @@ public partial class ValueMapper
     [GeneratedRegex(@"(\w+)-to-(\w+) map:")]
     private static partial Regex HeaderRegex();
 
-    private IDictionary<int, int> _valueMap;
+    private IDictionary<long, long> _valueMap;
 
-    private static IEnumerable<(int SourceValue, int DestinationValue)> ParseRange(string rangeString)
+    private static IEnumerable<(long SourceValue, long DestinationValue)> ParseRange(string rangeString)
     {
         var match = RangeRegex().Match(rangeString);
 
@@ -51,9 +51,9 @@ public partial class ValueMapper
             throw new Exception("Unable to parse range.");
         }
 
-        var destinationStart = int.Parse(match.Groups[1].ValueSpan);
-        var sourceStart = int.Parse(match.Groups[2].ValueSpan);
-        var length = int.Parse(match.Groups[3].ValueSpan);
+        var destinationStart = long.Parse(match.Groups[1].ValueSpan);
+        var sourceStart = long.Parse(match.Groups[2].ValueSpan);
+        var length = long.Parse(match.Groups[3].ValueSpan);
 
         for (int i = 0; i < length; i++)
         {
@@ -64,10 +64,10 @@ public partial class ValueMapper
     [GeneratedRegex(@"(\d+)\s+(\d+)\s+(\d+)")]
     private static partial Regex RangeRegex();
 
-    public int Map(int sourceValue) =>
+    public long Map(long sourceValue) =>
         _valueMap.TryGetValue(sourceValue, out var destinationValue) ?
         destinationValue :
         sourceValue;
 
-    public int this[int sourceValue] => Map(sourceValue);
+    public long this[long sourceValue] => Map(sourceValue);
 }

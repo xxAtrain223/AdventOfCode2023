@@ -13,5 +13,9 @@ return await rootCommand.InvokeAsync(args);
 
 static void FindClosestLocation(FileInfo file)
 {
-    throw new NotImplementedException();
+    var seedMapper = new SeedMapper(file);
+    var minimumLocation = seedMapper.FindMinimumLocation();
+
+    Console.WriteLine($"Minimum Location: {minimumLocation}");
+    Console.ReadLine();
 }
