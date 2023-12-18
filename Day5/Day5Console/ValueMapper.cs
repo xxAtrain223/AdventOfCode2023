@@ -71,4 +71,17 @@ public partial class ValueMapper
 
         return sourceValue;
     }
+
+    public long MapBackward(long destinationValue)
+    {
+        foreach (var (sourceStart, destinationStart, length) in _valueMaps)
+        {
+            if (destinationValue >= destinationStart && destinationValue < (destinationStart + length))
+            {
+                return sourceStart + (destinationValue - destinationStart);
+            }
+        }
+
+        return destinationValue;
+    }
 }

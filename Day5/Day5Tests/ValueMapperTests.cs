@@ -51,4 +51,23 @@ public class ValueMapperTests
 
         mapper.MapForward(55).Should().Be(55);
     }
+
+    [Fact]
+    public void ShouldMapBackward()
+    {
+        var mapString = """
+            seed-to-soil map:
+            50 98 2
+            52 50 48
+            """;
+
+        var mapper = new ValueMapper(mapString);
+        mapper.MapBackward(50).Should().Be(98);
+        mapper.MapBackward(51).Should().Be(99);
+
+        mapper.MapBackward(52).Should().Be(50);
+        mapper.MapBackward(53).Should().Be(51);
+
+        mapper.MapBackward(1).Should().Be(1);
+    }
 }
