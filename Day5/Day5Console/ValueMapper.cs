@@ -59,7 +59,7 @@ public partial class ValueMapper
     [GeneratedRegex(@"(\d+)\s+(\d+)\s+(\d+)")]
     private static partial Regex RangeRegex();
 
-    public long Map(long sourceValue)
+    public long MapForward(long sourceValue)
     {
         foreach (var (sourceStart, destinationStart, length) in _valueMaps)
         {
@@ -71,6 +71,4 @@ public partial class ValueMapper
 
         return sourceValue;
     }
-
-    public long this[long sourceValue] => Map(sourceValue);
 }

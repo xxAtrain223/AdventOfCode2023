@@ -26,12 +26,12 @@ public partial class SeedMapper
     public long MapTo(long seedValue, string destination)
     {
         var mapper = _valueMappers["seed"];
-        var mappedValue = mapper.Map(seedValue);
+        var mappedValue = mapper.MapForward(seedValue);
 
         while (mapper.Destination != destination)
         {
             mapper = _valueMappers[mapper.Destination];
-            mappedValue = mapper.Map(mappedValue);
+            mappedValue = mapper.MapForward(mappedValue);
         }
 
         return mappedValue;
