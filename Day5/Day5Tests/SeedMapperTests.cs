@@ -2,7 +2,7 @@
 
 public class SeedMapperTests
 {
-    private readonly SeedMapper seedMapper = new("""
+    private const string MappingsString = """
         seeds: 79 14 55 13
 
         seed-to-soil map:
@@ -36,7 +36,8 @@ public class SeedMapperTests
         humidity-to-location map:
         60 56 37
         56 93 4
-        """);
+        """;
+    private readonly SeedMapper seedMapper = new(MappingsString, false);
 
     [Theory]
     [InlineData(79, 81)]
@@ -121,5 +122,12 @@ public class SeedMapperTests
     public void ShouldFindMinimumLocation()
     {
         seedMapper.FindMinimumLocationForward().Should().Be(35);
+    }
+
+    [Fact]
+    public void FindMinimumLocationForwardRange()
+    {
+        SeedMapper seedMapper = new(MappingsString, true);
+        seedMapper.FindMinimumLocationForwardRange().Should().Be(46);
     }
 }

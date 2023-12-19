@@ -70,4 +70,179 @@ public class ValueMapperTests
 
         mapper.MapBackward(1).Should().Be(1);
     }
+
+    [Fact]
+    public void ShouldMapSeedToSoilRanges()
+    {
+        var mapString = """
+            seed-to-soil map:
+            52 50 48
+            50 98 2
+            """;
+
+        var mapper = new ValueMapper(mapString);
+
+        mapper.MapRangesForward([
+                (79, 14),
+                (55, 13)
+            ])
+            .Should()
+            .BeEquivalentTo([
+                (57, 13),
+                (81, 14)
+            ]);
+    }
+
+    [Fact]
+    public void ShouldMapSoilToFertilizerRanges()
+    {
+        var mapString = """
+            soil-to-fertilizer map:
+            39 0 15
+            0 15 37
+            37 52 2
+            """;
+
+        var mapper = new ValueMapper(mapString);
+
+        mapper.MapRangesForward([
+                (57, 13),
+                (81, 14)
+            ])
+            .Should()
+            .BeEquivalentTo([
+                (57, 13),
+                (81, 14)
+            ]);
+    }
+
+    [Fact]
+    public void ShouldMapFertilizerToWaterRanges()
+    {
+        var mapString = """
+            fertilizer-to-water map:
+            42 0 7
+            57 7 4
+            0 11 42
+            49 53 8
+            """;
+
+        var mapper = new ValueMapper(mapString);
+
+        mapper.MapRangesForward([
+                (57, 13),
+                (81, 14)
+            ])
+            .Should()
+            .BeEquivalentTo([
+                (53, 4),
+                (61, 9),
+                (81, 14)
+            ]);
+    }
+
+    [Fact]
+    public void ShouldMapWaterToLightRanges()
+    {
+        var mapString = """
+            water-to-light map:
+            88 18 7
+            18 25 70
+            """;
+
+        var mapper = new ValueMapper(mapString);
+
+        mapper.MapRangesForward([
+                (53, 4),
+                (61, 9),
+                (81, 14)
+            ])
+            .Should()
+            .BeEquivalentTo([
+                (46, 4),
+                (54, 9),
+                (74, 14)
+            ]);
+    }
+
+    [Fact]
+    public void ShouldMapLightToTemperatureRanges()
+    {
+        var mapString = """
+            light-to-temperature map:
+            81 45 19
+            68 64 13
+            45 77 23
+            """;
+
+        var mapper = new ValueMapper(mapString);
+
+        mapper.MapRangesForward([
+                (46, 4),
+                (54, 9),
+                (74, 14)
+            ])
+            .Should()
+            .BeEquivalentTo([
+                (82, 4),
+                (90, 9),
+                (78, 3),
+                (45, 11)
+            ]);
+    }
+
+    [Fact]
+    public void ShouldMapTemperatureToHumidityRanges()
+    {
+        var mapString = """
+            temperature-to-humidity map:
+            1 0 69
+            0 69 1
+            """;
+
+        var mapper = new ValueMapper(mapString);
+
+        mapper.MapRangesForward([
+                (45, 11),
+                (78, 3),
+                (82, 4),
+                (90, 9),
+            ])
+            .Should()
+            .BeEquivalentTo([
+                (46, 11),
+                (78, 3),
+                (82, 4),
+                (90, 9),
+            ]);
+    }
+
+    [Fact]
+    public void ShouldMapHumidityToLocationRanges()
+    {
+        var mapString = """
+            humidity-to-location map:
+            60 56 37
+            56 93 4
+            """;
+
+        var mapper = new ValueMapper(mapString);
+
+        mapper.MapRangesForward([
+                (46, 11),
+                (78, 3),
+                (82, 4),
+                (90, 9),
+            ])
+            .Should()
+            .BeEquivalentTo([
+                (46, 10),
+                (60, 1),
+                (82, 3),
+                (86, 4),
+                (94, 3),
+                (56, 4),
+                (97, 2)
+            ]);
+    }
 }

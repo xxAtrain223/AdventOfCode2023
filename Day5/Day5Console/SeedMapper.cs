@@ -47,6 +47,20 @@ public partial class SeedMapper
         return mappedValue;
     }
 
+    public IEnumerable<(long RangeStart, long RangeLength)> MapRangesForward(string destination)
+    {
+        var mapper = _valueMappers["seed"];
+        var mappedRanges = mapper.MapRangesForward(_seedRanges).ToArray();
+
+        while (mapper.Destination != destination)
+        {
+            mapper = _valueMappers[mapper.Destination];
+            mappedRanges = mapper.MapRangesForward(mappedRanges).ToArray();
+        }
+
+        return mappedRanges;
+    }
+
     private static IEnumerable<long> ParseSeeds(string seedsString)
     {
         if (seedsString.StartsWith("seeds:") == false)
@@ -84,9 +98,9 @@ public partial class SeedMapper
     [GeneratedRegex(@"(\d+)\s+(\d+)")]
     private static partial Regex NumberPairRegex();
 
-    private long[]? _seeds;
+    private long[] _seeds = [];
 
-    private (long SeedStart, long SeedLength)[]? _seedRanges;
+    private (long SeedStart, long SeedLength)[] _seedRanges = [];
 
     public IEnumerable<long> Seeds
     { 
@@ -96,7 +110,6 @@ public partial class SeedMapper
             {
                 foreach (var (seedStart, seedLength) in _seedRanges!)
                 {
-                    Console.WriteLine($"SeedStart: {seedStart}");
                     for (int i = 0; i < seedLength; i++)
                     {
                         yield return seedStart + i;
@@ -123,10 +136,12 @@ public partial class SeedMapper
             var minimum = chunk
                 .Select(s => MapForward(s, "location"))
                 .Min();
-            Console.WriteLine($"Found minimum {minimum}");
             minimums.Add(minimum);
         });
 
         return minimums.Min();
     }
+
+    public long FindMinimumLocationForwardRange() =>
+        MapRangesForward("location").Min(r => r.RangeStart);
 }

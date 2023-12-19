@@ -73,16 +73,60 @@ public partial class ValueMapper
         return sourceValue;
     }
 
-    //public IEnumerable<(long RangeStart, long RangeLength)> MapRangesForward(IEnumerable<(long RangeStart, long RangeLength)> ranges)
-    //{
-    //    foreach (var (rangeStart, rangeLength) in ranges.OrderBy(r => r.RangeStart))
-    //    {
-    //        var overlappingRanges = _valueMaps
-    //            .Where(m =>
-    //                rangeStart <= m.SourceStart + m.Length &&
-    //                m.SourceStart <= rangeStart + rangeLength);
-    //    }
-    //}
+    public IEnumerable<(long RangeStart, long RangeLength)> MapRangesForward(IEnumerable<(long RangeStart, long RangeLength)> ranges)
+    {
+        foreach (var range in ranges.OrderBy(r => r.RangeStart))
+        {
+            var start = range.RangeStart;
+            var length = range.RangeLength;
+
+            foreach (var (sourceStart, destinationStart, mapLength) in _valueMaps)
+            {
+                if (length < 0)
+                {
+                    throw new Exception("Went below 0.");
+                }
+                if (length == 0)
+                {
+                    break;
+                }
+
+                long usedLength = 0;
+
+                if (start < sourceStart)
+                {
+                    var availableLength = sourceStart - start;
+                    usedLength = length < availableLength ? length : availableLength;
+                    
+                    yield return (start, usedLength);
+
+                    length -= usedLength;
+                    start += usedLength;
+
+                    if (length == 0)
+                    {
+                        break;
+                    }
+                }
+
+                if (start < sourceStart + mapLength)
+                {
+                    var availableLength = mapLength - (start - sourceStart);
+                    usedLength = length < availableLength ? length : availableLength;
+
+                    yield return (destinationStart + (start - sourceStart), usedLength);
+
+                    length -= usedLength;
+                    start += usedLength;
+                }
+            }
+
+            if (length > 0)
+            {
+                yield return (start, length);
+            }
+        }
+    }
 
     public long MapBackward(long destinationValue)
     {
