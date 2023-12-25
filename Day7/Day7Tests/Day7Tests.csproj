@@ -25,4 +25,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Day7Console\Day7Console.csproj" />
+  </ItemGroup>
+
 </Project>
