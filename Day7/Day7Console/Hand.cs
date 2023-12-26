@@ -4,30 +4,46 @@ namespace AdventOfCode2023.Day7.Day7Console;
 
 public partial class Hand
 {
-    public Hand(string cards, HandType handType, int bid)
+    private readonly int _part;
+
+    public Hand(string cards, HandType handType, int bid, int part = 1)
     {
         Cards = cards;
         HandType = handType;
         Bid = bid;
+        _part = part;
     }
 
     public string Cards { get; private set; }
+    public IEnumerable<CardType> CardTypes => Cards.Select(c => ToCardType(c));
     public HandType HandType { get; private set; }
     public int Bid { get; private set; }
 
-    public static IEnumerable<Hand> ParseHands(FileInfo file) =>
-        File.ReadLines(file.FullName)
-            .Select(ParseHand);
+    public static IEnumerable<Hand> ParseHands(FileInfo file, int part = 1) =>
+        ParseHands(File.ReadLines(file.FullName), part);
 
-    public static Hand ParseHand(string handText)
+    public static IEnumerable<Hand> ParseHands(IEnumerable<string> lines, int part = 1) =>
+        lines.Select(l => ParseHand(l, part));
+
+    public static Hand ParseHand(string handText, int part = 1)
     {
         var words = handText.Split(' ');
         var cards = words[0];
-        var handType = ParseHandType(words[0]);
+        var handType = part == 1 ?
+            ParseHandType(words[0]) :
+            ParseBestHandType(words[0]);
         var bid = int.Parse(words[1]);
 
-        return new Hand(cards, handType, bid);
+        return new Hand(cards, handType, bid, part);
     }
+
+    public static HandType ParseBestHandType(string handText) =>
+        handText.Contains('J') == false || handText == "JJJJJ" ?
+        ParseHandType(handText) :
+        handText
+            .Where(c => c != 'J')
+            .Distinct()
+            .Max(c => ParseHandType(handText.Replace('J', c)));
 
     public static HandType ParseHandType(string handText)
     {
@@ -92,6 +108,27 @@ public partial class Hand
     public static long GetWinnings(IEnumerable<Hand> hands) =>
         Rank(hands)
             .Sum(r => r.Hand.Bid * r.Rank);
+
+    public CardType ToCardType(char character) => ToCardType(character, _part);
+
+    public static CardType ToCardType(char character, int part) =>
+        character switch
+        {
+            '2' => CardType.Two,
+            '3' => CardType.Three,
+            '4' => CardType.Four,
+            '5' => CardType.Five,
+            '6' => CardType.Six,
+            '7' => CardType.Seven,
+            '8' => CardType.Eight,
+            '9' => CardType.Nine,
+            'T' => CardType.Ten,
+            'J' => part == 1 ? CardType.Jack : CardType.Joker,
+            'Q' => CardType.Queen,
+            'K' => CardType.King,
+            'A' => CardType.Ace,
+            _ => throw new ArgumentException($"Character '{character}' is invalid.", nameof(character)),
+        };
 }
 
 public class HandComparer : IComparer<Hand>
@@ -120,11 +157,10 @@ public class HandComparer : IComparer<Hand>
             return 1;
         }
 
-        for (int i = 0; i < x.Cards.Length; i++)
-        {
-            var leftCard = x.Cards[i].ToCardType();
-            var rightCard = y.Cards[i].ToCardType();
+        
 
+        foreach (var (leftCard, rightCard) in x.CardTypes.Zip(y.CardTypes))
+        {
             if (leftCard < rightCard)
             {
                 return -1;
@@ -152,6 +188,7 @@ public enum HandType
 
 public enum CardType
 {
+    Joker = 1,
     Two = 2,
     Three = 3,
     Four = 4,
@@ -169,22 +206,5 @@ public enum CardType
 
 public static class Extensions
 {
-    public static CardType ToCardType(this char character) =>
-        character switch
-        {
-            '2' => CardType.Two,
-            '3' => CardType.Three,
-            '4' => CardType.Four,
-            '5' => CardType.Five,
-            '6' => CardType.Six,
-            '7' => CardType.Seven,
-            '8' => CardType.Eight,
-            '9' => CardType.Nine,
-            'T' => CardType.Ten,
-            'J' => CardType.Jack,
-            'Q' => CardType.Queen,
-            'K' => CardType.King,
-            'A' => CardType.Ace,
-            _ => throw new ArgumentException($"Character '{character}' is invalid.", nameof(character)),
-        };
+    
 }

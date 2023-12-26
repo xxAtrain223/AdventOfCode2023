@@ -23,22 +23,23 @@ public class HandTests
     }
 
     [Theory]
-    [InlineData('2', CardType.Two, 2)]
-    [InlineData('3', CardType.Three, 3)]
-    [InlineData('4', CardType.Four, 4)]
-    [InlineData('5', CardType.Five, 5)]
-    [InlineData('6', CardType.Six, 6)]
-    [InlineData('7', CardType.Seven, 7)]
-    [InlineData('8', CardType.Eight, 8)]
-    [InlineData('9', CardType.Nine, 9)]
-    [InlineData('T', CardType.Ten, 10)]
-    [InlineData('J', CardType.Jack, 11)]
-    [InlineData('Q', CardType.Queen, 12)]
-    [InlineData('K', CardType.King, 13)]
-    [InlineData('A', CardType.Ace, 14)]
-    public void ShouldReturnCardType(char character, CardType expectedCardType, int expectedCardValue)
+    [InlineData('2', CardType.Two, 2, 1)]
+    [InlineData('3', CardType.Three, 3, 1)]
+    [InlineData('4', CardType.Four, 4, 1)]
+    [InlineData('5', CardType.Five, 5, 1)]
+    [InlineData('6', CardType.Six, 6, 1)]
+    [InlineData('7', CardType.Seven, 7, 1)]
+    [InlineData('8', CardType.Eight, 8, 1)]
+    [InlineData('9', CardType.Nine, 9, 1)]
+    [InlineData('T', CardType.Ten, 10, 1)]
+    [InlineData('J', CardType.Jack, 11, 1)]
+    [InlineData('Q', CardType.Queen, 12, 1)]
+    [InlineData('K', CardType.King, 13, 1)]
+    [InlineData('A', CardType.Ace, 14, 1)]
+    [InlineData('J', CardType.Joker, 1, 2)]
+    public void ShouldReturnCardType(char character, CardType expectedCardType, int expectedCardValue, int part)
     {
-        var actualCardType = character.ToCardType();
+        var actualCardType = Hand.ToCardType(character, part);
 
         actualCardType.Should().Be(expectedCardType);
         ((int)actualCardType).Should().Be(expectedCardValue);
@@ -96,5 +97,39 @@ public class HandTests
         ];
 
         Hand.GetWinnings(hands).Should().Be(6440);
+    }
+
+    [Theory]
+    [ClassData(typeof(ParseHandPartTwoTestData))]
+    public void ShouldParseHandPartTwo(string handText, Hand expectedHand)
+    {
+        var actualHand = Hand.ParseHand(handText, 2);
+        actualHand.Should().BeEquivalentTo(expectedHand);
+    }
+
+    public class ParseHandPartTwoTestData : TheoryData<string, Hand>
+    {
+        public ParseHandPartTwoTestData()
+        {
+            Add("32T3K 765", new Hand("32T3K", HandType.OnePair, 765, 2));
+            Add("T55J5 684", new Hand("T55J5", HandType.FourOfAKind, 684, 2));
+            Add("KK677 28", new Hand("KK677", HandType.TwoPair, 28, 2));
+            Add("KTJJT 220", new Hand("KTJJT", HandType.FourOfAKind, 220, 2));
+            Add("QQQJA 483", new Hand("QQQJA", HandType.FourOfAKind, 483, 2));
+        }
+    }
+
+    [Fact]
+    public void ShouldReturnWinningsPartTwo()
+    {
+        var hands = Hand.ParseHands([
+            "32T3K 765",
+            "T55J5 684",
+            "KK677 28",
+            "KTJJT 220",
+            "QQQJA 483",
+        ], 2);
+
+        Hand.GetWinnings(hands).Should().Be(5905);
     }
 }
