@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Day 8 Part 1": {
+      "commandName": "Project",
+      "commandLineArgs": "--follow-instructions input.txt"
+    }
+  }
+}
