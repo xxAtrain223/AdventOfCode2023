@@ -29,13 +29,13 @@ public class NodeGraph
         return graph;
     }
 
-    public int FollowInstructions()
+    public long FollowInstructions(string startNodeID, Func<Node, bool> shouldLoop)
     {
-        var stepsCounter = 0;
+        long stepsCounter = 0;
         var instructionIndex = 0;
-        var currentNode = Nodes["AAA"];
+        var currentNode = Nodes[startNodeID];
 
-        while (currentNode.NodeID != "ZZZ")
+        while (shouldLoop(currentNode) == true)
         {
             if (Instructions[instructionIndex] == 'L')
             {
@@ -56,6 +56,23 @@ public class NodeGraph
 
         return stepsCounter;
     }
+
+    public IEnumerable<Node> GetStartNodes() => Nodes.Values.Where(n => n.NodeID.EndsWith('A'));
+
+    public long GetCycleLength(string nodeID) => FollowInstructions(nodeID, n => n.NodeID.EndsWith('Z') == false);
+
+    public long FollowInstructionsGhostMode() =>
+        LeastCommonMultiple(GetStartNodes().Select(n => GetCycleLength(n.NodeID)));
+
+    // https://stackoverflow.com/questions/147515/least-common-multiple-for-3-or-more-numbers
+    private static long LeastCommonMultiple(IEnumerable<long> numbers) =>
+        numbers.Aggregate(LeastCommonMultiple);
+
+    private static long LeastCommonMultiple(long a, long b) =>
+        (a / GreatestCommonDivisor(a, b)) * b;
+
+    private static long GreatestCommonDivisor(long a, long b) =>
+        b == 0 ? a : GreatestCommonDivisor(b, a % b);
 }
 
 public partial record Node(string NodeID, string LeftID, string RightID)

@@ -66,7 +66,7 @@ public class NodeGraphTests
             "ZZZ = (ZZZ, ZZZ)"
         ]);
 
-        graph.FollowInstructions().Should().Be(2);
+        graph.FollowInstructions("AAA", n => n.NodeID != "ZZZ").Should().Be(2);
     }
 
     [Fact]
@@ -80,6 +80,68 @@ public class NodeGraphTests
             "ZZZ = (ZZZ, ZZZ)"
         ]);
 
-        graph.FollowInstructions().Should().Be(6);
+        graph.FollowInstructions("AAA", n => n.NodeID != "ZZZ").Should().Be(6);
+    }
+
+    [Fact]
+    public void ShouldReturnStartNodes()
+    {
+        var graph = NodeGraph.Parse([
+            "LR",
+            "",
+            "11A = (11B, XXX)",
+            "11B = (XXX, 11Z)",
+            "11Z = (11B, XXX)",
+            "22A = (22B, XXX)",
+            "22B = (22C, 22C)",
+            "22C = (22Z, 22Z)",
+            "22Z = (22B, 22B)",
+            "XXX = (XXX, XXX)",
+        ]);
+
+        graph.GetStartNodes().Should().BeEquivalentTo([
+            new Node("11A", "11B", "XXX"),
+            new Node("22A", "22B", "XXX")
+        ]);
+    }
+
+    [Theory]
+    [InlineData("11A", 2)]
+    [InlineData("22A", 3)]
+    public void ShouldReturnCycleLengths(string nodeID, long expectedCycleLength)
+    {
+        var graph = NodeGraph.Parse([
+            "LR",
+            "",
+            "11A = (11B, XXX)",
+            "11B = (XXX, 11Z)",
+            "11Z = (11B, XXX)",
+            "22A = (22B, XXX)",
+            "22B = (22C, 22C)",
+            "22C = (22Z, 22Z)",
+            "22Z = (22B, 22B)",
+            "XXX = (XXX, XXX)",
+        ]);
+
+        graph.GetCycleLength(nodeID).Should().Be(expectedCycleLength);
+    }
+
+    [Fact]
+    public void ShouldFollowInstructionsGhostMode()
+    {
+        var graph = NodeGraph.Parse([
+            "LR",
+            "",
+            "11A = (11B, XXX)",
+            "11B = (XXX, 11Z)",
+            "11Z = (11B, XXX)",
+            "22A = (22B, XXX)",
+            "22B = (22C, 22C)",
+            "22C = (22Z, 22Z)",
+            "22Z = (22B, 22B)",
+            "XXX = (XXX, XXX)",
+        ]);
+
+        graph.FollowInstructionsGhostMode().Should().Be(6);
     }
 }
