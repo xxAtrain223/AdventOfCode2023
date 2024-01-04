@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day5.Day5Console;
+﻿namespace AdventOfCode2023.Day5;
 public partial class SeedMapper
 {
     private readonly Dictionary<string, ValueMapper> _valueMappers;

@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode2023.Day5.Day5Tests;
+﻿namespace AdventOfCode2023.Day5;
 
 public class SeedMapperTests
 {
