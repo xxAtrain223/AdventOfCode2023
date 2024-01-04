@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Day8.Day8Tests;
+namespace AdventOfCode2023.Day8;
 
 public class NodeGraphTests
 {

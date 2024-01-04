@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day8.Day8Console;
+﻿namespace AdventOfCode2023.Day8;
 
 public class NodeGraph
 {
