@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day7.Day7Console;
+﻿namespace AdventOfCode2023.Day7;
 
 public partial class Hand
 {

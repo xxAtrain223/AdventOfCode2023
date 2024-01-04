@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Day7.Day7Tests;
+namespace AdventOfCode2023.Day7;
 
 public class HandTests
 {

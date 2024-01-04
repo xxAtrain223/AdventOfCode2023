@@ -9,12 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day7", "Day7", "{DB5EEF52-48F6-4B1E-946D-FCADB73D5211}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day7Console", "Day7\Day7Console\Day7Console.csproj", "{CA70B134-E212-4050-87C3-CC23A33932B2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day7Tests", "Day7\Day7Tests\Day7Tests.csproj", "{FDCD50E3-3EC1-478B-B807-67AFDAA65A76}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day8", "Day8", "{8FDB68FC-4FF1-4B46-AF88-ED7028298C09}"
 	ProjectSection(SolutionItems) = preProject
 		Day8\Day8Description.md = Day8\Day8Description.md
@@ -32,14 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CA70B134-E212-4050-87C3-CC23A33932B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA70B134-E212-4050-87C3-CC23A33932B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA70B134-E212-4050-87C3-CC23A33932B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA70B134-E212-4050-87C3-CC23A33932B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDCD50E3-3EC1-478B-B807-67AFDAA65A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDCD50E3-3EC1-478B-B807-67AFDAA65A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDCD50E3-3EC1-478B-B807-67AFDAA65A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDCD50E3-3EC1-478B-B807-67AFDAA65A76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2D52C54-3074-472E-A849-B85BE0141387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2D52C54-3074-472E-A849-B85BE0141387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2D52C54-3074-472E-A849-B85BE0141387}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,8 +43,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CA70B134-E212-4050-87C3-CC23A33932B2} = {DB5EEF52-48F6-4B1E-946D-FCADB73D5211}
-		{FDCD50E3-3EC1-478B-B807-67AFDAA65A76} = {DB5EEF52-48F6-4B1E-946D-FCADB73D5211}
 		{D2D52C54-3074-472E-A849-B85BE0141387} = {8FDB68FC-4FF1-4B46-AF88-ED7028298C09}
 		{127C00E5-7446-4D28-AA59-ED20CFD76794} = {8FDB68FC-4FF1-4B46-AF88-ED7028298C09}
 	EndGlobalSection
