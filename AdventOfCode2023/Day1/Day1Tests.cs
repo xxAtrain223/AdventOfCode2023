@@ -3,13 +3,13 @@
 public class Day1Tests(ITestOutputHelper Output)
 {
     [Fact]
-    public void Part1AndPart2()
+    public void Part2()
     {
-        var calibrationValue = CalibrationValues.GetCalibrationValue(Input.SplitByLine());
+        var calibrationValue = CalibrationValues.GetCalibrationValue(InputLines);
         Output.WriteLine(calibrationValue.ToString());
     }
 
-    private static readonly string Input = """
+    private static string Input => """
         eight9fhstbssrplmdlncmmqqnklb39ninejz
         three656
         ppjvndvknbtpfsncplmhhrlh5
@@ -1011,4 +1011,6 @@ public class Day1Tests(ITestOutputHelper Output)
         5sixfour2qxsqkpnq
         kdkjqdkvgs2
         """;
+
+    private static IEnumerable<string> InputLines => Input.SplitByLine();
 }

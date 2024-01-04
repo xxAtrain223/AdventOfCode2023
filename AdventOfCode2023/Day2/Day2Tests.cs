@@ -6,18 +6,18 @@ public class Day2Tests(ITestOutputHelper Output)
     public void Part1()
     {
         var bag = new Bag(12, 13, 14);
-        var sumOfPossibleGameIDs = bag.SumPossibleGameIDs(Input.SplitByLine());
+        var sumOfPossibleGameIDs = bag.SumPossibleGameIDs(InputLines);
         Output.WriteLine(sumOfPossibleGameIDs.ToString());
     }
 
     [Fact]
     public void Part2()
     {
-        var gamePowers = Bag.SumGamePowers(Input.SplitByLine());
+        var gamePowers = Bag.SumGamePowers(InputLines);
         Output.WriteLine(gamePowers.ToString());
     }
 
-    private static readonly string Input = """
+    private static string Input => """
         Game 1: 7 blue, 4 red, 11 green; 2 red, 2 blue, 7 green; 2 red, 13 blue, 8 green; 18 blue, 7 green, 5 red
         Game 2: 3 green, 4 red, 4 blue; 6 red, 4 green, 4 blue; 2 blue, 4 green, 3 red
         Game 3: 1 red, 2 green, 3 blue; 1 red, 2 green; 2 green, 3 red; 1 blue, 2 red
@@ -119,4 +119,6 @@ public class Day2Tests(ITestOutputHelper Output)
         Game 99: 2 red, 16 blue, 1 green; 2 green, 12 blue, 6 red; 1 red, 3 green, 3 blue; 8 red, 1 green; 2 red, 9 blue; 1 green, 7 red, 9 blue
         Game 100: 8 green, 3 red; 7 green, 4 red; 1 red, 7 green, 2 blue; 1 green, 2 red
         """;
+
+    private static IEnumerable<string> InputLines => Input.SplitByLine();
 }
