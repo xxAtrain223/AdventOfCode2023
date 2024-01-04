@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Day1.Day1Tests;
+namespace AdventOfCode2023.Day1;
 
 public partial class CalibrationValuesTests
 {

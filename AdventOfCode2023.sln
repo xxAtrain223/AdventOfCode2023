@@ -3,15 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day1", "Day1", "{DDAA6524-8002-46B7-9C31-F92DEB4CA3CC}"
-	ProjectSection(SolutionItems) = preProject
-		Day1\Day1Description.md = Day1\Day1Description.md
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day1Console", "Day1\Day1Console\Day1Console.csproj", "{BFF8804D-5459-4882-8E23-02A4A8B3057B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day1Tests", "Day1\Day1Tests\Day1Tests.csproj", "{038D3CE9-2BF8-42AA-BDD4-1EFCC5747150}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F17298E6-0D96-48AF-95B0-651C75027503}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -71,9 +62,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day8", "Day8", "{8FDB68FC-4
 		Day8\Day8Description.md = Day8\Day8Description.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day8Tests", "Day8\Day8Tests\Day8Tests.csproj", "{D2D52C54-3074-472E-A849-B85BE0141387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day8Tests", "Day8\Day8Tests\Day8Tests.csproj", "{D2D52C54-3074-472E-A849-B85BE0141387}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day8Console", "Day8\Day8Console\Day8Console.csproj", "{127C00E5-7446-4D28-AA59-ED20CFD76794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day8Console", "Day8\Day8Console\Day8Console.csproj", "{127C00E5-7446-4D28-AA59-ED20CFD76794}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2023", "AdventOfCode2023\AdventOfCode2023.csproj", "{38723152-B66A-4315-9977-0E3206883AAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,14 +74,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BFF8804D-5459-4882-8E23-02A4A8B3057B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFF8804D-5459-4882-8E23-02A4A8B3057B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFF8804D-5459-4882-8E23-02A4A8B3057B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFF8804D-5459-4882-8E23-02A4A8B3057B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{038D3CE9-2BF8-42AA-BDD4-1EFCC5747150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{038D3CE9-2BF8-42AA-BDD4-1EFCC5747150}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{038D3CE9-2BF8-42AA-BDD4-1EFCC5747150}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{038D3CE9-2BF8-42AA-BDD4-1EFCC5747150}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A161EDE6-1571-437D-AAFD-7C34CEA0C833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A161EDE6-1571-437D-AAFD-7C34CEA0C833}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A161EDE6-1571-437D-AAFD-7C34CEA0C833}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -145,13 +130,15 @@ Global
 		{127C00E5-7446-4D28-AA59-ED20CFD76794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{127C00E5-7446-4D28-AA59-ED20CFD76794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{127C00E5-7446-4D28-AA59-ED20CFD76794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38723152-B66A-4315-9977-0E3206883AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38723152-B66A-4315-9977-0E3206883AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38723152-B66A-4315-9977-0E3206883AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38723152-B66A-4315-9977-0E3206883AAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BFF8804D-5459-4882-8E23-02A4A8B3057B} = {DDAA6524-8002-46B7-9C31-F92DEB4CA3CC}
-		{038D3CE9-2BF8-42AA-BDD4-1EFCC5747150} = {DDAA6524-8002-46B7-9C31-F92DEB4CA3CC}
 		{A161EDE6-1571-437D-AAFD-7C34CEA0C833} = {A1D6C972-91A9-4DCE-BCE6-55841D93CE54}
 		{F2AA0C71-2F07-4D8F-B343-21212431044E} = {A1D6C972-91A9-4DCE-BCE6-55841D93CE54}
 		{BB4DFF41-48F9-43FA-ABC7-4671BC48F0BC} = {6BE4C0B2-CA48-446B-AC08-29C7FC0F203A}

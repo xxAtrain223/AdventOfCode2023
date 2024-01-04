@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day1.Day1Console;
+﻿namespace AdventOfCode2023.Day1;
 
 public static partial class CalibrationValues
 {
