@@ -1,6 +1,4 @@
-using FluentAssertions;
-
-namespace AdventOfCode2023.Day6.Day6Tests;
+namespace AdventOfCode2023.Day6;
 
 public class RaceTests
 {

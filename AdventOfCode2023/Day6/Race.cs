@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day6.Day6Console;
+﻿namespace AdventOfCode2023.Day6;
 
 public partial class Race
 {
