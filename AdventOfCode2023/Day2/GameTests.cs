@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Day2.Day2Tests;
+namespace AdventOfCode2023.Day2;
 
 public class GameTests
 {

@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day2.Day2Console;
+﻿namespace AdventOfCode2023.Day2;
 
 public partial record Bag(int RedCount, int GreenCount, int BlueCount)
 {

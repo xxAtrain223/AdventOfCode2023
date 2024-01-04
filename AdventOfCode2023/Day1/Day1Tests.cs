@@ -1,6 +1,4 @@
-﻿using Xunit.Abstractions;
-
-namespace AdventOfCode2023.Day1;
+﻿namespace AdventOfCode2023.Day1;
 
 public class Day1Tests(ITestOutputHelper Output)
 {
