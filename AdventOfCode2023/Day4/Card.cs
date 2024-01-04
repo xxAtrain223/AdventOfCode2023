@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day4.Day4Console;
+﻿namespace AdventOfCode2023.Day4;
 
 public partial class Card
 {

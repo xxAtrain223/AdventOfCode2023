@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Day4.Day4Tests;
+namespace AdventOfCode2023.Day4;
 
 public class CardTests
 {
