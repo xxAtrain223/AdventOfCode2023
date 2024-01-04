@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AdventOfCode2023.Day3.Day3Console;
+﻿namespace AdventOfCode2023.Day3;
 
 public record struct Part(int PartNumber, int Row, Range Indices);
 
@@ -35,6 +33,12 @@ public partial class Schematic
         {
             MapLine(line);
         }
+    }
+
+    public void MapFile(IEnumerable<string> lines)
+    {
+        MapLines(lines);
+        FinalizeMapping();
     }
 
     public void MapFile(FileInfo file)

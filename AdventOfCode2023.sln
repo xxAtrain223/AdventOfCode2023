@@ -9,15 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day3", "Day3", "{6BE4C0B2-CA48-446B-AC08-29C7FC0F203A}"
-	ProjectSection(SolutionItems) = preProject
-		Day3\Day3Description.md = Day3\Day3Description.md
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day3Tests", "Day3\Day3Tests\Day3Tests.csproj", "{BB4DFF41-48F9-43FA-ABC7-4671BC48F0BC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day3Console", "Day3\Day3Console\Day3Console.csproj", "{CE3BB5AE-5B69-4E95-B678-2655BB591916}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day4", "Day4", "{33E67D30-05EF-4275-BB34-CB3379C61C40}"
 	ProjectSection(SolutionItems) = preProject
 		Day4\Day4Description.md = Day4\Day4Description.md
@@ -65,14 +56,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BB4DFF41-48F9-43FA-ABC7-4671BC48F0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB4DFF41-48F9-43FA-ABC7-4671BC48F0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB4DFF41-48F9-43FA-ABC7-4671BC48F0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB4DFF41-48F9-43FA-ABC7-4671BC48F0BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE3BB5AE-5B69-4E95-B678-2655BB591916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE3BB5AE-5B69-4E95-B678-2655BB591916}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE3BB5AE-5B69-4E95-B678-2655BB591916}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE3BB5AE-5B69-4E95-B678-2655BB591916}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFFDB3FE-58E2-4842-BF38-B4902AA9995E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFFDB3FE-58E2-4842-BF38-B4902AA9995E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFFDB3FE-58E2-4842-BF38-B4902AA9995E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -122,8 +105,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BB4DFF41-48F9-43FA-ABC7-4671BC48F0BC} = {6BE4C0B2-CA48-446B-AC08-29C7FC0F203A}
-		{CE3BB5AE-5B69-4E95-B678-2655BB591916} = {6BE4C0B2-CA48-446B-AC08-29C7FC0F203A}
 		{EFFDB3FE-58E2-4842-BF38-B4902AA9995E} = {33E67D30-05EF-4275-BB34-CB3379C61C40}
 		{76B57729-BB53-4F2E-B967-55AEF7E3B95D} = {33E67D30-05EF-4275-BB34-CB3379C61C40}
 		{F21C0E42-C7F1-4635-94DC-51CCB5AC286D} = {77010A7D-9AE6-468C-98EE-A68D6B1AAA90}
